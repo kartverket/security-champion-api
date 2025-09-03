@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 @CrossOrigin("http://localhost:3000")
 class SecurityChampionController {
     @PostMapping("/api/securityChampion/")
-    fun getSecurityChampions( @RequestBody body: GetSecurityChampionsBody) {
-        listOf(
+    fun getSecurityChampions( @RequestBody body: GetSecurityChampionsBody): List<SecurityChampion> {
+        return listOf(
             SecurityChampion(id = "Test", email = "mail.com", repo = "repo"),
             SecurityChampion(id = "Test", email = "mail.com", repo = "repo"),
             SecurityChampion(id = "Test", email = "mail.com", repo = body.repositoryNames.toString())
         )
-
-
     }
 }
