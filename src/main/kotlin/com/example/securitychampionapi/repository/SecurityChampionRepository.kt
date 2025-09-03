@@ -1,14 +1,7 @@
 package com.example.securitychampionapi.repository
 
-import com.example.securitychampionapi.dto.SecurityChampion
-import org.springframework.stereotype.Repository
+import com.example.securitychampionapi.repository.models.SecurityChampionDB
+import org.springframework.data.repository.CrudRepository
 
-@Repository
-class SecurityChampionRepository() {
 
-    fun getSecurityChampions(repositories: List<String>): List<SecurityChampion> =
-        repositories.map { repoName ->
-            SecurityChampion(repositoryName = repoName, securityChampionEmail = "$repoName@mail.com")
-        }
-
-}
+interface SecurityChampionRepository : CrudRepository<SecurityChampionDB, String>

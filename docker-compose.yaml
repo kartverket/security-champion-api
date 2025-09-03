@@ -1,0 +1,15 @@
+services:
+  db:
+    image: "postgres:16.8"
+    container_name: "security-champion-db"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=passord
+      - POSTGRES_DB=security-champion-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

@@ -10,7 +10,7 @@ class SecurityChampionService(val securityChampionRepository: SecurityChampionRe
 
 
     fun getSecurityChampions(repositories: List<String>): List<SecurityChampion> =
-                securityChampionRepository.getSecurityChampions(repositories)
+              emptyList()
 
 
 
