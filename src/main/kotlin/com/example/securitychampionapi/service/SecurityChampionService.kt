@@ -12,5 +12,6 @@ class SecurityChampionService(private val repository: SecurityChampionRepository
         repository.getSecurityChampions(repositories)
 
 
-    fun getSecurityChampionById(id : String): SecurityChampion  = TODO()
+    fun setSecurityChampion(securityChampion: SecurityChampion): String =
+        repository.setSecurityChampion(securityChampion)
 }

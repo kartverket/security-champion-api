@@ -3,7 +3,10 @@ package com.example.securitychampionapi.controller
 import com.example.securitychampionapi.dto.GetSecurityChampionsBody
 import com.example.securitychampionapi.dto.SecurityChampion
 import com.example.securitychampionapi.service.SecurityChampionService
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -14,8 +17,8 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
         return securityChampionService.getSecurityChampions(body.repositoryNames)
     }
 
-    @GetMapping("/api/securityChampion/{id}")
-    fun getSecurityChampion(@PathVariable id: String): SecurityChampion {
-        return securityChampionService.getSecurityChampionById(id)
+    @PostMapping("/api/setSecurityChampion/")
+    fun getSecurityChampion(@RequestBody body: SecurityChampion): String {
+        return securityChampionService.setSecurityChampion(body)
     }
 }
