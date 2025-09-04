@@ -1,6 +1,7 @@
 package com.example.securitychampionapi.service
 
 import com.example.securitychampionapi.dto.SecurityChampion
+import com.example.securitychampionapi.dto.SecurityChampionResponse
 import org.springframework.stereotype.Service
 
 
@@ -12,6 +13,6 @@ class SecurityChampionService(private val repository: SecurityChampionRepository
         repository.getSecurityChampions(repositories)
 
 
-    fun setSecurityChampion(securityChampion: SecurityChampion): String =
+    fun setSecurityChampion(securityChampion: SecurityChampion): SecurityChampionResponse =
         repository.setSecurityChampion(securityChampion)
 }
