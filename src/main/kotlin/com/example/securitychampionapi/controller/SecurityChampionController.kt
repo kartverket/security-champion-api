@@ -14,6 +14,11 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
 
     @PostMapping("/api/securityChampion/")
     fun getSecurityChampions(@RequestBody body: GetSecurityChampionsBody): List<SecurityChampion> {
-       return securityChampionService.getSecurityChampions(body.repositoryNames)
+        return securityChampionService.getSecurityChampions(body.repositoryNames)
+    }
+
+    @PostMapping("/api/setSecurityChampion/")
+    fun getSecurityChampion(@RequestBody body: SecurityChampion): String {
+        return securityChampionService.setSecurityChampion(body)
     }
 }
