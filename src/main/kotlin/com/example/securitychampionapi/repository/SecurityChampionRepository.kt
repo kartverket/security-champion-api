@@ -1,4 +1,4 @@
-package com.example.securitychampionapi.service
+package com.example.securitychampionapi.repository
 
 import com.example.securitychampionapi.dto.SecurityChampion
 import org.springframework.jdbc.core.RowMapper
@@ -13,8 +13,9 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
 
 
     fun getSecurityChampions(repositories: List<String>): List<SecurityChampion> {
-        val query = "SELECT email, reponame FROM securitychampions " +
-                "JOIN repositories ON securitychampions.email = repositories.secchampemail " +
+        val query = "SELECT email, reponame FROM securityChampion_repositories " +
+                "JOIN securityChampions ON securityChampion_repositories.secChampEmail = securityChampions.email " +
+                "JOIN repositories ON securityChampion_repositories.repoId = repositories.id " +
                 "WHERE reponame IN (:repositories)"
 
         val params = MapSqlParameterSource()
@@ -30,33 +31,49 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
     }
 
     fun setSecurityChampion(securityChampion: SecurityChampion): String {
-
-        //Inserting secchamp if it does not already exist
-        val query1 = "INSERT INTO securitychampions (email)" +
-                "VALUES (:email)" +
-                "ON CONFLICT (email) DO NOTHING;"
-        val secChampParams = MapSqlParameterSource()
-        secChampParams.addValue("email", securityChampion.securityChampionEmail)
-
-        jdbcTemplate.update(
-            query1,
-            secChampParams
-        )
-
-        val query2 = "INSERT INTO repositories (reponame, secchampemail)" +
-                "VALUES (:repo, :email)" +
-                "ON CONFLICT (reponame) DO UPDATE " +
-                "SET secchampemail = (:email);"
-
-        val repoParams = MapSqlParameterSource()
-        repoParams.addValue("email", securityChampion.securityChampionEmail)
-        repoParams.addValue("repo", securityChampion.repositoryName)
-
-        jdbcTemplate.update(
-            query2,
-            repoParams
-        )
+        createNewSecurityChampionIfNotExists(securityChampion.securityChampionEmail)
+        createNewRepositoryIfNotExists(securityChampion.repositoryName)
+        linkRepositoryToSecurityChampion(securityChampion.repositoryName, securityChampion.securityChampionEmail)
         return "Updated SecurityChampion"
+    }
+
+    private fun createNewSecurityChampionIfNotExists(securityChampionEmail: String) : Int {
+        val query = "INSERT INTO securitychampions (email) VALUES (:email) ON CONFLICT (email) DO NOTHING;"
+
+        val params = MapSqlParameterSource()
+            .addValue("email", securityChampionEmail)
+
+        return jdbcTemplate.update(
+            query,
+            params
+        )
+
+    }
+    private fun createNewRepositoryIfNotExists(repositoryName: String) : Int {
+        val query = "INSERT INTO repositories (reponame) VALUES (:reponame) ON CONFLICT (reponame) DO NOTHING;"
+        val params = MapSqlParameterSource()
+            .addValue("reponame", repositoryName)
+
+        return jdbcTemplate.update(
+            query,
+            params
+        )
+    }
+
+    private fun linkRepositoryToSecurityChampion(repositoryName: String, securityChampionEmail: String): Int {
+
+        val query = "INSERT INTO securityChampion_repositories (repoId, secChampEmail)" +
+                "VALUES ((SELECT id FROM repositories WHERE reponame = :reponame), :email)" +
+                "ON CONFLICT (repoId) DO UPDATE SET secChampEmail = :email;"
+
+        val params = MapSqlParameterSource()
+            .addValue("reponame", repositoryName)
+            .addValue("email", securityChampionEmail)
+
+        return jdbcTemplate.update(
+            query,
+            params
+        )
     }
 
     class SecurityChampionRowMapper : RowMapper<SecurityChampion> {
