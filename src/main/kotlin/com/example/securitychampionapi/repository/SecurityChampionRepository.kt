@@ -1,7 +1,6 @@
 package com.example.securitychampionapi.repository
 
 import com.example.securitychampionapi.dto.SecurityChampion
-import com.example.securitychampionapi.dto.SecurityChampionResponse
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
@@ -31,13 +30,10 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         return result
     }
 
-    fun setSecurityChampion(securityChampion: SecurityChampion): SecurityChampionResponse {
-        createNewSecurityChampionIfNotExists(securityChampion.securityChampionEmail)
-        createNewRepositoryIfNotExists(securityChampion.repositoryName)
-        linkRepositoryToSecurityChampion(securityChampion.repositoryName, securityChampion.securityChampionEmail)
-        return SecurityChampionResponse(
-            statusMessage = "SUCCESS",
-        )
+    fun setSecurityChampion(repositoryName: String, securityChampionEmail: String) {
+        createNewSecurityChampionIfNotExists(securityChampionEmail)
+        createNewRepositoryIfNotExists(repositoryName)
+        linkRepositoryToSecurityChampion(repositoryName, securityChampionEmail)
     }
 
     private fun createNewSecurityChampionIfNotExists(securityChampionEmail: String) : Int {
