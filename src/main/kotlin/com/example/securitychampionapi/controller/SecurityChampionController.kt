@@ -2,6 +2,7 @@ package com.example.securitychampionapi.controller
 
 import com.example.securitychampionapi.dto.GetSecurityChampionsBody
 import com.example.securitychampionapi.dto.SecurityChampion
+import com.example.securitychampionapi.dto.SecurityChampionResponse
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
@@ -18,7 +19,7 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
     }
 
     @PostMapping("/api/setSecurityChampion/")
-    fun getSecurityChampion(@RequestBody body: SecurityChampion): String {
+    fun getSecurityChampion(@RequestBody body: SecurityChampion): SecurityChampionResponse {
         return securityChampionService.setSecurityChampion(body)
     }
 }
