@@ -1,6 +1,7 @@
 package com.example.securitychampionapi.service
 
 import com.example.securitychampionapi.dto.SecurityChampion
+import com.example.securitychampionapi.repository.SecurityChampionRepository
 import com.example.securitychampionapi.dto.SecurityChampionResponse
 import org.springframework.stereotype.Service
 
