@@ -1,10 +1,6 @@
 spring:
   application:
     name: security-champion-api
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:db/schema.sql
 
   datasource:
     url: jdbc:postgresql://localhost:5432/security-champion-db
