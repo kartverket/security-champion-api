@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("http://localhost:3000")
 class SecurityChampionController(val securityChampionService: SecurityChampionService) {
 
     @PostMapping("/securityChampion")
