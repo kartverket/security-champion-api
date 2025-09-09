@@ -149,4 +149,18 @@ jobs:
       application_name: security-champion-api
       image_url: ${{ needs.build.outputs.image_url }}
       environment: dev
-      namespace: security-champion-api-main
+      namespace: sikkerhetsmetrikker-main
+
+  deploy-to-prod:
+    name: Deploy to prod
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && github.event.inputs.prod == 'true')) }}
+    needs: build
+    uses: kartverket/skvis-apps/.github/workflows/update-app-version.yaml@main
+    permissions:
+      id-token: write
+    with:
+      application_name: security-champion-api
+      image_url: ${{ needs.build.outputs.image_url }}
+      environment: prod
+      namespace: sikkerhetsmetrikker-main
+
