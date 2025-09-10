@@ -35,4 +35,5 @@ jobs:
             --allow-unauthenticated \
             --platform managed \
             --set-env-vars "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
+            --timeout=900 \
             --quiet
