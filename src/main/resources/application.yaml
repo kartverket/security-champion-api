@@ -2,13 +2,13 @@ spring:
   application:
     name: security-champion-api
 
-  datasource:
-    url: jdbc:postgresql://google/postgres?cloudSqlInstance=spire-kartverket-dev:europe-west1:security-champion-api-db&socketFactory=com.google.cloud.sql.postgres.SocketFactory
-    username: postgres
-    password: ${DB_PASSWORD}
-
 server:
   port: ${PORT:8080}
   address: 0.0.0.0
 
+
+#  datasource:
+#    url: jdbc:postgresql://google/postgres?cloudSqlInstance=spire-kartverket-dev:europe-west1:security-champion-api-db&socketFactory=com.google.cloud.sql.postgres.SocketFactory
+#    username: postgres
+#    password: ${DB_PASSWORD}
 
