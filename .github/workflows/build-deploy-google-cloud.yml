@@ -34,4 +34,5 @@ jobs:
             --region ${{ env.REGION }} \
             --allow-unauthenticated \
             --platform managed \
+            --set-env-vars "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
             --quiet
