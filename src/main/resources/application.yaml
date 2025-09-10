@@ -2,13 +2,20 @@ spring:
   application:
     name: security-champion-api
 
+  flyway:
+    enabled: false
+
+  datasource:
+    url: jdbc:postgresql://localhost/secchamp?socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlInstance=spire-kartverket-dev:europe-west1:security-champion-api-db
+    username: postgres
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
 server:
   port: ${PORT:8080}
-  address: 0.0.0.0
 
 
-#  datasource:
-#    url: jdbc:postgresql://google/postgres?cloudSqlInstance=spire-kartverket-dev:europe-west1:security-champion-api-db&socketFactory=com.google.cloud.sql.postgres.SocketFactory
-#    username: postgres
-#    password: ${DB_PASSWORD}
 
