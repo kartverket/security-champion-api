@@ -2,8 +2,7 @@ spring:
   application:
     name: security-champion-api
 
-  flyway:
-    enabled: false
+
 
   datasource:
     url: jdbc:postgresql://localhost/secchamp?socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlInstance=spire-kartverket-dev:europe-west1:security-champion-api-db
