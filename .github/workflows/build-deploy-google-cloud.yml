@@ -36,5 +36,7 @@ jobs:
             --allow-unauthenticated \
             --platform managed \
             --set-env-vars "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
+            --set-env-vars "DB_USERNAME=${{secrets.DB_USERNAME}}" \
+            --set-env-vars "DB_URL=${{secrets.DB_URL}}" \
             --timeout=900 \
             --quiet
