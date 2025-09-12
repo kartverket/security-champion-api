@@ -1,17 +1,33 @@
 spring:
   application:
     name: security-champion-api
-
-
-
   datasource:
-    url: jdbc:postgresql://localhost/secchamp?socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlInstance=spire-kartverket-dev:europe-west1:security-champion-api-db
-    username: postgres
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: secchamp
+      maximum-pool-size: 5
+      minimum-idle: 1
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health
+    access:
+      default: read_only
+  endpoint:
+    prometheus:
+      access: read_only
+    health:
+      access: read_only
 
 server:
   port: ${PORT:8080}
