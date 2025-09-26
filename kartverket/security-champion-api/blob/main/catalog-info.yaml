@@ -1,0 +1,26 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: TEST
+  tags:
+    - internal
+spec:
+  type: service
+  lifecycle: development
+  owner: skvisasdasd
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: security-champion-api-api
+  tags:
+    - internal
+spec:
+  type: openapi
+  lifecycle: production
+  owner: skvis
+  definition: |
+    openapi: "3.0.0"
+    info:
+        title: security-champion-api-api
