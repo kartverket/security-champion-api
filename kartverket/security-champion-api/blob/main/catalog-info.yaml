@@ -1,0 +1,38 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: security-champion-api
+  tags:
+    - internal
+spec:
+  type: service
+  lifecycle: production
+  owner: skvis
+  providesApis:
+    - security-champion-api-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: security-champion-api-apimoomk
+  tags:
+    - internal
+spec:
+  type: library
+  lifecycle: production
+  owner: skvis
+  definition: |
+    openapi: "3.0.0"
+    info:
+        title: security-champion-api-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: km
+spec:
+  type: library
+  owner: lavdas_-_product_owner
+  lifecycle: development
