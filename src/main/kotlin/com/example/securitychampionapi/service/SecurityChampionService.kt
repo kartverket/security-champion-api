@@ -12,7 +12,12 @@ class SecurityChampionService(private val repository: SecurityChampionRepository
     fun getSecurityChampions(repositories: List<String>): List<SecurityChampion> =
         repository.getSecurityChampions(repositories)
 
+    fun getAllSecurityChampions(): List<String> =
+        repository.getAllSecurityChampions()
 
     fun setSecurityChampion(repositoryName: String, securityChampionEmail: String) =
         repository.setSecurityChampion(repositoryName, securityChampionEmail)
+
+    fun setSecurityChampionWithoutRepo(securityChampionEmail: String) =
+        repository.setSecurityChampionWithoutRepo(securityChampionEmail)
 }
