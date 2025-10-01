@@ -43,14 +43,14 @@ Under finnes en oversikt over API endepunktene til security champion API.
         "/securityChampion" : {
             "post": {
                 "summary": "get security champions"
-            }
+            },
             "requestBody": {
                 "required": true,
                 "content": {
                     "application/json": {
                     "schema": {
-                        "type": "array",
-                        }
+                        "type": "array"
+                        },
                     "items": {
                         "type": "string"
                         }
@@ -58,23 +58,48 @@ Under finnes en oversikt over API endepunktene til security champion API.
                 }   
             }
         }
-    }
+    },
 
     "paths": {
         "/setSecurityChampion" : {
             "post": {
                 "summary": "set a security champion"
-            }
+            },
             "requestBody": {
                 "required": true,
                 "content": {
                     "application/json": {
                     "schema": {
-                        "type": "string",
+                        "type": "string"
                         }
                     }
                 }   
             }
+        }
+    },
+  
+    "paths": {
+        "/setSecurityChampionWithoutRepo" : {
+          "post": {
+            "summary": "set a security champion that is not tied to a repo"
+          },
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+      }
+    },
+    "paths": {
+        "/getAllSecurityChampions" : {
+          "get": {
+            "summary": "get all security champion emails in the DB"
+          }
         }
     }
 }
