@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: security-champion-api
+  tags:
+    - internal
+spec:
+  type: service
+  lifecycle: production
+  owner: skvis
+  providesApis:
+    - security-champion-api-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ny-entitet
+spec:
+  type: service
+  owner: skvis
+  lifecycle: production
