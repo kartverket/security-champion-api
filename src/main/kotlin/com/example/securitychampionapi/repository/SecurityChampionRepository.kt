@@ -30,10 +30,22 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         return result
     }
 
+    fun getAllSecurityChampions(): List<String> {
+        val query = "SELECT email FROM securityChampions"
+        val emails : List<String> = jdbcTemplate.query(
+            query
+        ){ rs, _ -> rs.getString("email") }
+        return emails
+    }
+
     fun setSecurityChampion(repositoryName: String, securityChampionEmail: String) {
         createNewSecurityChampionIfNotExists(securityChampionEmail)
         createNewRepositoryIfNotExists(repositoryName)
         linkRepositoryToSecurityChampion(repositoryName, securityChampionEmail)
+    }
+
+    fun setSecurityChampionWithoutRepo(securityChampionEmail: String) {
+        createNewSecurityChampionIfNotExists(securityChampionEmail)
     }
 
     private fun createNewSecurityChampionIfNotExists(securityChampionEmail: String) : Int {
