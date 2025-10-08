@@ -36,7 +36,7 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         linkRepositoryToSecurityChampion(repositoryName, securityChampionEmail)
     }
 
-    private fun createNewSecurityChampionIfNotExists(securityChampionEmail: String) : Int {
+    private fun createNewSecurityChampionIfNotExists(securityChampionEmail: String): Int {
         val query = "INSERT INTO securitychampions (email) VALUES (:email) ON CONFLICT (email) DO NOTHING;"
 
         val params = MapSqlParameterSource()
@@ -48,7 +48,8 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         )
 
     }
-    private fun createNewRepositoryIfNotExists(repositoryName: String) : Int {
+
+    private fun createNewRepositoryIfNotExists(repositoryName: String): Int {
         val query = "INSERT INTO repositories (reponame) VALUES (:reponame) ON CONFLICT (reponame) DO NOTHING;"
         val params = MapSqlParameterSource()
             .addValue("reponame", repositoryName)
@@ -83,5 +84,20 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
             )
         }
     }
+
+    fun getRepositoriesWithSecurityChampions(): List<SecurityChampion> {
+        val query = """
+                SELECT email, reponame FROM securityChampion_repositories 
+                JOIN securityChampions ON securityChampion_repositories.secChampEmail = securityChampions.email
+                JOIN repositories ON securityChampion_repositories.repoId = repositories.id
+        """
+
+        val result = jdbcTemplate.query(
+            query,
+            SecurityChampionRowMapper()
+        ).toList()
+        return result
+    }
+
 }
 
