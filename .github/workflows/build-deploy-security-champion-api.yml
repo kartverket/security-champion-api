@@ -37,6 +37,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
+  ARGO_VERSION_FILE: image-url-security-champion-api
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -138,29 +139,60 @@ jobs:
         with:
           image_url: ${{ needs.build.outputs.image_url }}
 
-  deploy-to-dev:
-    name: Deploy to dev
+  dev-deploy:
+    name: Deploy to KV-dev
     if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dev == 'true')) }}
     needs: build
-    uses: kartverket/skvis-apps/.github/workflows/update-app-version.yaml@main
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
     permissions:
       id-token: write
-    with:
-      application_name: security-champion-api
-      image_url: ${{ needs.build.outputs.image_url }}
-      environment: dev
-      namespace: sikkerhetsmetrikker-main
+    steps:
+      - uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # v1.0.0
+        id: octo-sts
+        with:
+          scope: kartverket/skvis-apps
+          identity: security-champion-api
+      - name: Checkout skvis-apps
+        uses: actions/checkout@v4
+        with:
+          repository: kartverket/skvis-apps
+          ref: main
+          token: ${{ steps.octo-sts.outputs.token }}
+      - name: Update version
+        run: |
+          echo "\"${{ needs.build.outputs.image_url }}\"" > "env/atgcp1-dev/sikkerhetsmetrikker-main/${{ env.ARGO_VERSION_FILE }}"
+          git config --global user.email "noreply@kartverket.no"
+          git config --global user.name "Security-champion-API CI"
+          git commit -am "Update Security-champion-API"
+          git push
 
-  deploy-to-prod:
-    name: Deploy to prod
-    if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && github.event.inputs.prod == 'true')) }}
+  prod-deploy:
+    name: Deploy to KV-prod
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dev == 'true')) }}
     needs: build
-    uses: kartverket/skvis-apps/.github/workflows/update-app-version.yaml@main
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
     permissions:
       id-token: write
-    with:
-      application_name: security-champion-api
-      image_url: ${{ needs.build.outputs.image_url }}
-      environment: prod
-      namespace: sikkerhetsmetrikker-main
-
+    steps:
+      - uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # v1.0.0
+        id: octo-sts
+        with:
+          scope: kartverket/skvis-apps
+          identity: security-champion-api
+      - name: Checkout skvis-apps
+        uses: actions/checkout@v4
+        with:
+          repository: kartverket/skvis-apps
+          ref: main
+          token: ${{ steps.octo-sts.outputs.token }}
+      - name: Update version
+        run: |
+          echo "\"${{ needs.build.outputs.image_url }}\"" > "env/atgcp1-prod/sikkerhetsmetrikker-main/${{ env.ARGO_VERSION_FILE }}"
+          git config --global user.email "noreply@kartverket.no"
+          git config --global user.name "Security-champion-API CI"
+          git commit -am "Update Security-champion-API"
+          git push
