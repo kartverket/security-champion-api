@@ -1,0 +1,28 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: security-champion-api
+  tags:
+    - internal
+spec:
+  type: service
+  lifecycle: production
+  owner: skvis
+  providesApis:
+    - security-champion-api-api
+  consumesApis:
+    - nk3config-api
+  dependsOn: []
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: security-champion-api-api
+  tags:
+    - internal
+spec:
+  type: openapi
+  lifecycle: production
+  owner: skvis
+  definition: path
