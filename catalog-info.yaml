@@ -1,28 +1,29 @@
-# nonk8s
-apiVersion: 'backstage.io/v1alpha1'
-kind: 'Component'
+apiVersion: backstage.io/v1alpha1
+kind: Component
 metadata:
-  name: 'security-champion-api'
+  name: security-champion-api
   tags:
-    - 'internal'
+    - internal
 spec:
-  type: 'service'
-  lifecycle: 'production'
-  owner: 'skvis'
+  type: service
+  lifecycle: production
+  owner: skvis
   providesApis:
-    - 'security-champion-api-api'
+    - security-champion-api-api
+
 ---
-apiVersion: "backstage.io/v1alpha1"
-kind: "API"
+apiVersion: backstage.io/v1alpha1
+kind: API
 metadata:
-  name: "security-champion-api-api"
+  name: security-champion-api-api
   tags:
-    - "internal"
+    - internal
 spec:
-  type: "openapi"
-  lifecycle: "production"
-  owner: "skvis"
+  type: openapi
+  lifecycle: production
+  owner: skvis
   definition: |
     openapi: "3.0.0"
     info:
         title: security-champion-api-api
+  system: sikkerhetsmetrikker
