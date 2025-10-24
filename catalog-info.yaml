@@ -5,7 +5,7 @@ metadata:
   tags:
     - internal
 spec:
-  type: service
+  type: serviceasd
   lifecycle: production
   owner: skvis
   providesApis:
