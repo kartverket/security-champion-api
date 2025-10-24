@@ -5,25 +5,20 @@ metadata:
   tags:
     - internal
 spec:
-  type: service
+  type: new-service-type
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
+    - security-champion-public-api
   system: utviklerportal
 
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: security-champion-api-api
-  tags:
-    - internal
+  name: security-champion-public-api
 spec:
   type: openapi
-  lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  lifecycle: production
+  system: sikkerhetsmetrikker
