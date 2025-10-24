@@ -7,23 +7,9 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: skvis
+  owner: eiet_-_tech_lead
   providesApis:
     - security-champion-api-api
   system: utviklerportal
-
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: security-champion-api-api
-  tags:
-    - internal
-spec:
-  type: openapi
-  lifecycle: production
-  owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  consumesApis:
+    - frisk-backend-api
