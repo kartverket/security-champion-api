@@ -19,6 +19,7 @@ metadata:
   name: security-champion-api-api
   tags:
     - internal
+  title: ln lkjn lk
 spec:
   type: openapi
   lifecycle: production
