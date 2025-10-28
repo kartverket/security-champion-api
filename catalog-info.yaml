@@ -4,6 +4,7 @@ metadata:
   name: security-champion-api
   tags:
     - internal
+  title: hei
 spec:
   type: service
   lifecycle: production
