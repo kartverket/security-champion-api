@@ -1,29 +1,38 @@
-apiVersion: backstage.io/v1alpha1
-kind: Component
+# nonk8s
+apiVersion: "backstage.io/v1alpha1"
+kind: "Component"
 metadata:
-  name: security-champion-service
+  name: "skoop-apps"
   tags:
-    - internal
+    - "internal"
 spec:
-  type: service
-  lifecycle: production
-  owner: skvis
-  providesApis:
-    - security-champion-api-api
-  system: utviklerportal
-
+  type: "ops"
+  lifecycle: "production"
+  owner: "skoop"
+  system: "skoop"
 ---
-apiVersion: backstage.io/v1alpha1
-kind: API
+apiVersion: "backstage.io/v1alpha1"
+kind: "Group"
 metadata:
-  name: security-champion-api-api
-  tags:
-    - internal
+  name: "security_champion_skoop-apps"
+  title: "Security Champion skoop-apps"
 spec:
-  type: openapi
-  lifecycle: production
-  owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  type: "security_champion"
+  parent: "it_security_champions"
+  members:
+    - "okpedersen"
+  children:
+    - "resource:skoop-apps"
+---
+apiVersion: "backstage.io/v1alpha1"
+kind: "Resource"
+metadata:
+  name: "skoop-apps"
+  links:
+    - url: "https://github.com/kartverket/skoop-apps"
+      title: "skoop-apps på GitHub"
+spec:
+  type: "repo"
+  owner: "security_champion_skoop-apps"
+  dependencyOf:
+    - "component:skoop-apps"
