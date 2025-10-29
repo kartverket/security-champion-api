@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: security-champion-api
+  name: security-champion-service
   tags:
     - internal
 spec:
