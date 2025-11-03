@@ -70,8 +70,13 @@ Under finnes en oversikt over API endepunktene til security champion API.
                 "content": {
                     "application/json": {
                     "schema": {
-                        "type": "string",
-                        }
+                        "type": "object",
+                        },
+                      "properties": {
+                        "repositoryName": "string",
+                        "securityChampionEmail": "string",
+                        "modifiedBy": "string"
+                      }
                     }
                 }   
             }
