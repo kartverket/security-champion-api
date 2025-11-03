@@ -4,10 +4,8 @@ import com.example.securitychampionapi.controller.models.GetSecurityChampionsBod
 import com.example.securitychampionapi.controller.models.GetSecurityChampionsResponse
 import com.example.securitychampionapi.controller.models.SecurityChampionResponse
 import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
-import com.example.securitychampionapi.dto.SecurityChampion
 import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
 import com.example.securitychampionapi.service.SecurityChampionService
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
