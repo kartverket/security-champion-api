@@ -41,3 +41,6 @@ out/
 
 ### RESOURCES ###
 /src/main/resources/application-local.yaml
+
+### Mac ###
+.DS_Store

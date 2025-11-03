@@ -32,7 +32,8 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
     fun setSecurityChampion(@RequestBody body: SetSecurityChampionBody): SetSecurityChampionResponse {
          securityChampionService.setSecurityChampion(
             repositoryName = body.repositoryName,
-            securityChampionEmail = body.securityChampionEmail
+            securityChampionEmail = body.securityChampionEmail,
+             modifiedBy = body.modifiedBy
         )
         return SetSecurityChampionResponse(statusMessage = "SUCCESS")
     }
