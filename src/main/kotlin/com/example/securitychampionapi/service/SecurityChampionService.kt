@@ -17,5 +17,8 @@ class SecurityChampionService(private val repository: SecurityChampionRepository
     fun setSecurityChampion(repositoryName: String, securityChampionEmail: String, modifiedBy: String) =
         repository.setSecurityChampion(repositoryName, securityChampionEmail, modifiedBy)
 
-    fun getAllRepositoryNamesWithSecurityChampion() = repository.getRepositoriesWithSecurityChampions().map { SecurityChampionResponse(it.repositoryName, it.securityChampionEmail) }
+    fun setSecurityChampions(repositoryNames: List<String>, securityChampionEmail: String, modifiedBy: String) =
+        repository.setSecurityChampions(repositoryNames, securityChampionEmail, modifiedBy)
+
+    fun getAllRepositoryNamesWithSecurityChampion() = repository.getRepositoriesWithSecurityChampions().map { SecurityChampionResponse(it.repository, it.email) }
 }
