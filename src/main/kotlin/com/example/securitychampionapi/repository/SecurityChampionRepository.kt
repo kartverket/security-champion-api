@@ -13,10 +13,10 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
 
 
     fun getSecurityChampions(repositories: List<String>): List<SecurityChampion> {
-        val query = "SELECT email, reponame FROM securityChampion_repositories " +
-                "JOIN securityChampions ON securityChampion_repositories.secChampEmail = securityChampions.email " +
-                "JOIN repositories ON securityChampion_repositories.repoId = repositories.id " +
-                "WHERE reponame IN (:repositories)"
+        val query = """
+            SELECT email, repository FROM securityChampion
+             WHERE repository IN (:repositories)
+         """
 
         val params = MapSqlParameterSource()
         params.addValue("repositories", repositories)
@@ -30,66 +30,28 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         return result
     }
 
-    fun setSecurityChampion(repositoryName: String, securityChampionEmail: String) {
-        createNewSecurityChampionIfNotExists(securityChampionEmail)
-        createNewRepositoryIfNotExists(repositoryName)
-        linkRepositoryToSecurityChampion(repositoryName, securityChampionEmail)
-    }
-
-    private fun createNewSecurityChampionIfNotExists(securityChampionEmail: String): Int {
-        val query = "INSERT INTO securitychampions (email) VALUES (:email) ON CONFLICT (email) DO NOTHING;"
+    fun setSecurityChampion(repositoryName: String, securityChampionEmail: String): Int {
+        val query = """    
+        INSERT INTO securityChampion (email, repository) 
+        VALUES (:email, :repository) 
+        ON CONFLICT (repository) 
+        DO UPDATE SET email = :email;
+        """
 
         val params = MapSqlParameterSource()
             .addValue("email", securityChampionEmail)
+            .addValue("repository", repositoryName)
 
         return jdbcTemplate.update(
             query,
             params
         )
-
-    }
-
-    private fun createNewRepositoryIfNotExists(repositoryName: String): Int {
-        val query = "INSERT INTO repositories (reponame) VALUES (:reponame) ON CONFLICT (reponame) DO NOTHING;"
-        val params = MapSqlParameterSource()
-            .addValue("reponame", repositoryName)
-
-        return jdbcTemplate.update(
-            query,
-            params
-        )
-    }
-
-    private fun linkRepositoryToSecurityChampion(repositoryName: String, securityChampionEmail: String): Int {
-
-        val query = "INSERT INTO securityChampion_repositories (repoId, secChampEmail)" +
-                "VALUES ((SELECT id FROM repositories WHERE reponame = :reponame), :email)" +
-                "ON CONFLICT (repoId) DO UPDATE SET secChampEmail = :email;"
-
-        val params = MapSqlParameterSource()
-            .addValue("reponame", repositoryName)
-            .addValue("email", securityChampionEmail)
-
-        return jdbcTemplate.update(
-            query,
-            params
-        )
-    }
-
-    class SecurityChampionRowMapper : RowMapper<SecurityChampion> {
-        override fun mapRow(rs: ResultSet, rowNum: Int): SecurityChampion {
-            return SecurityChampion(
-                repositoryName = rs.getString("repoName"),
-                securityChampionEmail = rs.getString("email"),
-            )
-        }
     }
 
     fun getRepositoriesWithSecurityChampions(): List<SecurityChampion> {
         val query = """
-                SELECT email, reponame FROM securityChampion_repositories 
-                JOIN securityChampions ON securityChampion_repositories.secChampEmail = securityChampions.email
-                JOIN repositories ON securityChampion_repositories.repoId = repositories.id
+                SELECT email, repository FROM securityChampion
+                WHERE repository IS NOT NULL
         """
 
         val result = jdbcTemplate.query(
@@ -99,5 +61,13 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         return result
     }
 
+    class SecurityChampionRowMapper : RowMapper<SecurityChampion> {
+        override fun mapRow(rs: ResultSet, rowNum: Int): SecurityChampion {
+            return SecurityChampion(
+                repositoryName = rs.getString("repository"),
+                securityChampionEmail = rs.getString("email"),
+            )
+        }
+    }
 }
 
