@@ -34,54 +34,78 @@ Under finnes en oversikt over API endepunktene til security champion API.
 
 ````json
 {
-    "info": {
-        "title": "Security Champion API",
-        "baseUrl": "/api",
+  "info": {
+    "title": "Security Champion API",
+    "baseUrl": "/api"
+  },
+  "paths": {
+    "/securityChampion": {
+      "post": {
+        "summary": "get security champions"
+      }
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array"
+            }
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+
+  "paths": {
+    "/setSecurityChampion": {
+      "post": {
+        "summary": "set a security champion"
+      }
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            },
+            "properties": {
+              "repositoryName": "string",
+              "securityChampionEmail": "string",
+              "modifiedBy": "string"
+            }
+          }
+        }
+      }
     },
-
-    "paths": {
-        "/securityChampion" : {
-            "post": {
-                "summary": "get security champions"
+    "/setSecurityChampions": {
+      "post": {
+        "summary": "update multiple repos with a security champion"
+      }
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            },
+            "properties": {
+              "repositoryNames": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "securityChampionEmail": "string",
+              "modifiedBy": "string"
             }
-            "requestBody": {
-                "required": true,
-                "content": {
-                    "application/json": {
-                    "schema": {
-                        "type": "array",
-                        }
-                    "items": {
-                        "type": "string"
-                        }
-                    }
-                }   
-            }
+          }
         }
+      }
     }
-
-    "paths": {
-        "/setSecurityChampion" : {
-            "post": {
-                "summary": "set a security champion"
-            }
-            "requestBody": {
-                "required": true,
-                "content": {
-                    "application/json": {
-                    "schema": {
-                        "type": "object",
-                        },
-                      "properties": {
-                        "repositoryName": "string",
-                        "securityChampionEmail": "string",
-                        "modifiedBy": "string"
-                      }
-                    }
-                }   
-            }
-        }
-    }
+  }
 }
 
 ````

@@ -64,7 +64,6 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
                     email = securityChampionEmail,
                     modifiedBy = modifiedBy) }
 
-        println(params)
         val batchParams = SqlParameterSourceUtils.createBatch(params)
         return jdbcTemplate.batchUpdate(query, batchParams)
     }
