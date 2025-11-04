@@ -5,6 +5,8 @@ import com.example.securitychampionapi.controller.models.GetSecurityChampionsRes
 import com.example.securitychampionapi.controller.models.SecurityChampionResponse
 import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
 import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
+import com.example.securitychampionapi.controller.models.SetSecurityChampionsBody
+import com.example.securitychampionapi.controller.models.SetSecurityChampionsResponse
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,8 +21,8 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
     fun getSecurityChampions(@RequestBody body: GetSecurityChampionsBody): GetSecurityChampionsResponse {
         return securityChampionService.getSecurityChampions(body.repositoryNames)
                 .map { SecurityChampionResponse(
-                    repositoryName = it.repositoryName,
-                    securityChampionEmail = it.securityChampionEmail
+                    repositoryName = it.repository,
+                    securityChampionEmail = it.email
                 )
             }
 
@@ -34,5 +36,15 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
              modifiedBy = body.modifiedBy
         )
         return SetSecurityChampionResponse(statusMessage = "SUCCESS")
+    }
+
+    @PostMapping("/setSecurityChampions")
+    fun setSecurityChampions(@RequestBody body: SetSecurityChampionsBody): SetSecurityChampionsResponse {
+        securityChampionService.setSecurityChampions(
+            repositoryNames = body.repositoryNames,
+            securityChampionEmail = body.securityChampionEmail,
+            modifiedBy = body.modifiedBy
+        )
+        return SetSecurityChampionsResponse(statusMessage = "SUCCESS")
     }
 }

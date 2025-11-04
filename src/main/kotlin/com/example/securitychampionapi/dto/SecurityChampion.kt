@@ -2,6 +2,7 @@ package com.example.securitychampionapi.dto
 
 
 data class SecurityChampion(
-    val repositoryName: String,
-    val securityChampionEmail: String,
+    val repository: String,
+    val email: String,
+    val modifiedBy: String? = null,
 )
