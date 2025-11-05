@@ -1,11 +1,7 @@
 package com.example.securitychampionapi.controller
 
-import com.example.securitychampionapi.controller.models.GetSecurityChampionsBody
-import com.example.securitychampionapi.controller.models.GetSecurityChampionsResponse
-import com.example.securitychampionapi.controller.models.SecurityChampionResponse
-import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
-import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
-import com.example.securitychampionapi.controller.models.SetSecurityChampionsBody
+
+import com.example.securitychampionapi.controller.models.*
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
@@ -20,7 +16,8 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
     @PostMapping("/securityChampion")
     fun getSecurityChampions(@RequestBody body: GetSecurityChampionsBody): GetSecurityChampionsResponse {
         return securityChampionService.getSecurityChampions(body.repositoryNames)
-                .map { SecurityChampionResponse(
+            .map {
+                SecurityChampionResponse(
                     repositoryName = it.repository,
                     securityChampionEmail = it.email
                 )
@@ -30,12 +27,22 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
 
     @PostMapping("/setSecurityChampion")
     fun setSecurityChampion(@RequestBody body: SetSecurityChampionBody): SetSecurityChampionResponse {
-         securityChampionService.setSecurityChampion(
+        securityChampionService.setSecurityChampion(
             repositoryName = body.repositoryName,
             securityChampionEmail = body.securityChampionEmail,
-             modifiedBy = body.modifiedBy
+            modifiedBy = body.modifiedBy
         )
         return SetSecurityChampionResponse(status = HttpStatus.OK)
+    }
+
+    @PostMapping("/setSecurityChampionWithNoRepo")
+    fun setSecurityChampionWithNoRepo(@RequestBody body: setSecurityChampionWithNoRepoBody): SetSecurityChampionResponse {
+        securityChampionService.setSecurityChampionWithNoRepo(
+            securityChampionEmail = body.securityChampionEmail,
+            modifiedBy = body.modifiedBy
+        )
+        return SetSecurityChampionResponse(statusMessage = "SUCCESS")
+
     }
 
     @PostMapping("/setSecurityChampions")
