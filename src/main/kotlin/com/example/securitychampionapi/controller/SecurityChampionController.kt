@@ -6,7 +6,6 @@ import com.example.securitychampionapi.controller.models.SecurityChampionRespons
 import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
 import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
 import com.example.securitychampionapi.controller.models.SetSecurityChampionsBody
-import com.example.securitychampionapi.controller.models.SetSecurityChampionsResponse
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
@@ -36,16 +35,16 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
             securityChampionEmail = body.securityChampionEmail,
              modifiedBy = body.modifiedBy
         )
-        return SetSecurityChampionResponse(statusMessage = "SUCCESS")
+        return SetSecurityChampionResponse(status = HttpStatus.OK)
     }
 
     @PostMapping("/setSecurityChampions")
-    fun setSecurityChampions(@RequestBody body: SetSecurityChampionsBody): SetSecurityChampionsResponse {
+    fun setSecurityChampions(@RequestBody body: SetSecurityChampionsBody): SetSecurityChampionResponse {
         securityChampionService.setSecurityChampions(
             repositoryNames = body.repositoryNames,
             securityChampionEmail = body.securityChampionEmail,
             modifiedBy = body.modifiedBy
         )
-        return SetSecurityChampionsResponse(status = HttpStatus.OK)
+        return SetSecurityChampionResponse(status = HttpStatus.OK)
     }
 }
