@@ -8,6 +8,7 @@ import com.example.securitychampionapi.controller.models.SetSecurityChampionResp
 import com.example.securitychampionapi.controller.models.SetSecurityChampionsBody
 import com.example.securitychampionapi.controller.models.SetSecurityChampionsResponse
 import com.example.securitychampionapi.service.SecurityChampionService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -45,6 +46,6 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
             securityChampionEmail = body.securityChampionEmail,
             modifiedBy = body.modifiedBy
         )
-        return SetSecurityChampionsResponse(statusMessage = "SUCCESS")
+        return SetSecurityChampionsResponse(status = HttpStatus.OK)
     }
 }
