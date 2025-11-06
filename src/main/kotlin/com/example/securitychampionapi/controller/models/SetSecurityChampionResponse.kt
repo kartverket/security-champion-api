@@ -1,5 +1,7 @@
 package com.example.securitychampionapi.controller.models
 
+import org.springframework.http.HttpStatus
+
 data class SetSecurityChampionResponse(
-    val statusMessage: String,
+    val status: HttpStatus,
 )
