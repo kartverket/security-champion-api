@@ -4,10 +4,8 @@ import com.example.securitychampionapi.controller.models.GetSecurityChampionsBod
 import com.example.securitychampionapi.controller.models.GetSecurityChampionsResponse
 import com.example.securitychampionapi.controller.models.SecurityChampionResponse
 import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
-import com.example.securitychampionapi.dto.SecurityChampion
 import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
 import com.example.securitychampionapi.service.SecurityChampionService
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -32,7 +30,8 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
     fun setSecurityChampion(@RequestBody body: SetSecurityChampionBody): SetSecurityChampionResponse {
          securityChampionService.setSecurityChampion(
             repositoryName = body.repositoryName,
-            securityChampionEmail = body.securityChampionEmail
+            securityChampionEmail = body.securityChampionEmail,
+             modifiedBy = body.modifiedBy
         )
         return SetSecurityChampionResponse(statusMessage = "SUCCESS")
     }

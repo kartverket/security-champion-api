@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 import java.sql.ResultSet
+import java.util.UUID
 
 
 @Repository
@@ -30,17 +31,18 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         return result
     }
 
-    fun setSecurityChampion(repositoryName: String, securityChampionEmail: String): Int {
+    fun setSecurityChampion(repositoryName: String, securityChampionEmail: String, modifiedBy: String): Int {
         val query = """    
-        INSERT INTO securityChampion (email, repository) 
-        VALUES (:email, :repository) 
-        ON CONFLICT (repository) 
-        DO UPDATE SET email = :email;
+        INSERT INTO securityChampion (email, repository, lastModifiedBy) 
+        VALUES (:email, :repository, :modifiedBy)
+        ON CONFLICT (repository)
+        DO UPDATE SET email = :email, lastModifiedBy = :modifiedBy;
         """
 
         val params = MapSqlParameterSource()
             .addValue("email", securityChampionEmail)
             .addValue("repository", repositoryName)
+            .addValue("modifiedBy", modifiedBy)
 
         return jdbcTemplate.update(
             query,
