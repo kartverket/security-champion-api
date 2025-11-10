@@ -10,6 +10,7 @@ spec:
   owner: skvis
   providesApis:
     - security-champion-api-api
+    - ny-api
   system: utviklerportal
 
 ---
@@ -20,7 +21,7 @@ metadata:
   tags:
     - internal
 spec:
-  type: openapi
+  type: asyncapi
   lifecycle: production
   owner: skvis
   definition: |
