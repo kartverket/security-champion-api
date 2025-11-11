@@ -41,7 +41,7 @@ class SecurityChampionController(val securityChampionService: SecurityChampionSe
             securityChampionEmail = body.securityChampionEmail,
             modifiedBy = body.modifiedBy
         )
-        return SetSecurityChampionResponse(statusMessage = "SUCCESS")
+        return SetSecurityChampionResponse(status = HttpStatus.OK)
 
     }
 
