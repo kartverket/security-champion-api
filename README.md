@@ -24,7 +24,7 @@ docker-compose up
 Tjenesten er en spring applikasjon skrevet i Kotlin med Gradle som byggeverktøy. Fra kommandolinjen kan applikasjonen bygges med `./gradlew build`. Brukes intellij kan applikasjonen også bygges fra Gradle menyen. Det er også en Dockerfile på rotnivå som bygger og kjører tjenesten.
 
 ### Hvordan kjøre tjenesten
-I intellij kan applikasjonen kjøres ved å kjøre main klassen. Fra kommandolinjen kan applikasjonen kjøres med `./gradlew bootRun`.
+I intellij kan applikasjonen kjøres ved å kjøre main klassen. Fra kommandolinjen kan applikasjonen kjøres med `./gradlew bootRun`
 
 
 
