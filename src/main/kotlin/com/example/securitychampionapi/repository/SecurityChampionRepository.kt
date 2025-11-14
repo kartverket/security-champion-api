@@ -49,7 +49,11 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         )
     }
 
-    fun setSecurityChampions(repositoryNames: List<String>, securityChampionEmail: String, modifiedBy: String): IntArray {
+    fun setSecurityChampions(
+        repositoryNames: List<String>,
+        securityChampionEmail: String,
+        modifiedBy: String
+    ): IntArray {
 
         val query = """
             INSERT INTO securityChampion (email, repository, lastModifiedBy)
@@ -58,11 +62,13 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
         """
 
 
-        val params =  repositoryNames.map {
-                SecurityChampion (
-                    repository = it,
-                    email = securityChampionEmail,
-                    modifiedBy = modifiedBy) }
+        val params = repositoryNames.map {
+            SecurityChampion(
+                repository = it,
+                email = securityChampionEmail,
+                modifiedBy = modifiedBy
+            )
+        }
 
         val batchParams = SqlParameterSourceUtils.createBatch(params)
         return jdbcTemplate.batchUpdate(query, batchParams)
@@ -79,6 +85,24 @@ class SecurityChampionRepository(private val jdbcTemplate: NamedParameterJdbcTem
             SecurityChampionRowMapper()
         ).toList()
         return result
+    }
+
+    fun setSecurityChampionWithNoRepo(securityChampionEmail: String, modifiedBy: String): Int {
+        val query = """
+            INSERT INTO securityChampion (email, lastModifiedBy)
+            VALUES (:email, :modifiedBy)
+            ON CONFLICT (email) 
+            WHERE repository IS NULL 
+            DO NOTHING
+        """
+        val params = MapSqlParameterSource()
+            .addValue("email", securityChampionEmail)
+            .addValue("modifiedBy", modifiedBy)
+
+        return jdbcTemplate.update(
+            query,
+            params
+        )
     }
 
     class SecurityChampionRowMapper : RowMapper<SecurityChampion> {
