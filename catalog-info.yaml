@@ -15,16 +15,10 @@ spec:
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: API
+kind: Component
 metadata:
-  name: security-champion-api-api
-  tags:
-    - internal
+  name: security-champion-service
 spec:
-  type: openapi
-  lifecycle: production
+  type: website
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  lifecycle: production
