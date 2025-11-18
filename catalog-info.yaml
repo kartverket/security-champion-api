@@ -28,3 +28,25 @@ spec:
     openapi: "3.0.0"
     info:
         title: security-champion-api-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: security-champion-api-resource
+  title: resource
+spec:
+  type: s3-bucket
+  owner: skvis
+  system: utviklerportal
+  dependencyof:
+    - resource:default/norgeskart3
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: security-champion-api-domain
+spec:
+  type: product-area
+  owner: skvis
