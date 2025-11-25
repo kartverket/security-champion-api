@@ -4,6 +4,8 @@ metadata:
   name: security-champion-service
   tags:
     - internal
+    - private
+    - custom-tag
 spec:
   type: service
   lifecycle: production
@@ -19,11 +21,45 @@ metadata:
   name: security-champion-api-api
   tags:
     - internal
+    - public
+    - another-one
 spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: security-champion-api
+  tags:
+    - system-tag
+    - system-tag2
+spec:
+  owner: se_havniv
+  domain: norgeskart-innsyn
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: security-champion-service
+  tags:
+    - another-one
+spec:
+  type: product-area
+  owner: se_havniv
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: security-champion-api
+  tags:
+    - resource-entity
+spec:
+  type: database
+  owner: se_havniv
