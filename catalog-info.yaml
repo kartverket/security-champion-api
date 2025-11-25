@@ -3,7 +3,8 @@ kind: Component
 metadata:
   name: security-champion-service
   tags:
-    - internal
+    - jnknkjjnk
+    - private
 spec:
   type: service
   lifecycle: production
@@ -23,7 +24,5 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: hgvvghihgv
