@@ -5,12 +5,12 @@ metadata:
   tags:
     - internal
 spec:
-  type: service
-  lifecycle: production
+  type: library
+  lifecycle: deprecated
   owner: skvis
   providesApis:
     - security-champion-api-api
-  system: utviklerportal
+  system: sepmod
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -23,7 +23,5 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: test
