@@ -7,7 +7,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: skvis
+  owner: fysak
   providesApis:
     - security-champion-api-api
   system: utviklerportal
@@ -23,7 +23,5 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: asd
