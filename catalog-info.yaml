@@ -2,14 +2,15 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: security-champion-service
-  tags:
-    - internal
+  tags: []
 spec:
-  type: service
+  type: a
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
+    - initialize-risc-api
+    - frisk-backend-api
+    - nk3config-api
   system: utviklerportal
 
 ---
@@ -23,7 +24,5 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: asd
