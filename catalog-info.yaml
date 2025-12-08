@@ -23,7 +23,40 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: this
+spec:
+  type: database
+  owner: dataplattform
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: is
+spec:
+  type: s3-bucket
+  owner: smia_-_product_owner
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: new
+spec:
+  type: website
+  owner: dataplattform
+  lifecycle: production
+  system: sikkerhetsmetrikker
+  providesApis:
+    - api:default/frisk-backend-api
+  consumesApis:
+    - api:default/frisk-backend-api
+  dependsOn:
+    - component:default/Norgeskart
