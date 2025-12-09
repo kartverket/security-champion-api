@@ -23,7 +23,28 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: new
+spec:
+  type: product-area
+  owner: regelrett_1
+  subdomainOf:
+    - domain:default/primaerdata
+    - domain:default/test
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: test
+spec:
+  type: product-area
+  owner: regelrett_1
+  subdomainOf:
+    - domain:default/innsikt
