@@ -9,8 +9,10 @@ spec:
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
+    - frisk-backend-api
   system: utviklerportal
+  consumesApis:
+    - frisk-backend-api
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -19,11 +21,35 @@ metadata:
   name: security-champion-api-api
   tags:
     - internal
+    - public
 spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
+  system: transformasjon
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: Domain
+  tags:
+    - testing
+spec:
+  type: product-area
+  owner: regelrett_1
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: Test-resource
+  tags:
+    - test
+spec:
+  type: database
+  owner: regelrett_1
+  dependencyof:
+    - component:default/prodspek_fkb_ar5
