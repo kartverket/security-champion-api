@@ -10,7 +10,10 @@ spec:
   owner: skvis
   providesApis:
     - security-champion-api-api
+    - meldingstjeneste-api
   system: utviklerportal
+  consumesApis:
+    - frisk-backend-api
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -23,7 +26,5 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
