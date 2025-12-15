@@ -7,10 +7,18 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: skvis
+  owner: group:default/security_champion_kartverket.dev
   providesApis:
-    - security-champion-api-api
-  system: utviklerportal
+    - api:default/security-champion-api-api
+  system: system:default/utviklerportal
+  consumesApis:
+    - api:default/frisk-backend-api
+    - api:default/meldingstjeneste-api
+    - api:default/kartverket.dev-api
+  dependsOn:
+    - component:default/prodspek_fkb_arealbruk
+    - resource:default/kartverket.dev
+    - component:default/asdsadasdasd
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -22,8 +30,44 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  owner: group:default/fysak
+  definition:
+    $text: asd
+  system: system:default/dokumentbestilling
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: asdsadasdasd
+  title: asdsadsa
+  tags:
+    - private
+    - public
+spec:
+  type: service
+  owner: group:default/kontrollsenter_-_tech_lead
+  lifecycle: production
+  system: system:default/dsa
+  providesApis:
+    - api:default/frisk-backend-api
+    - api:default/kartverket.dev-api
+  consumesApis:
+    - api:default/frisk-backend-api
+  dependsOn:
+    - component:default/asdsadasdasd
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: resshrs
+  tags:
+    - asd
+spec:
+  type: kubernetes-clusterasdasd
+  owner: group:default/security_champion_kartverket.vectortiles
+  system: system:default/nibas
+  dependencyOf:
+    - component:default/prodspek_fkb_arealbruk
+    - resource:default/resshrs
