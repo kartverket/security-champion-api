@@ -4,13 +4,19 @@ metadata:
   name: security-champion-service
   tags:
     - internal
+    - new
 spec:
   type: service
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
+    - api:default/security-champion-api-api
+    - api:default/new-api
   system: utviklerportal
+  consumesApis:
+    - api:default/new-api
+  dependsOn:
+    - resource:default/new-resource
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -23,7 +29,50 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
+  system: system:default/new-system
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: new-api
+  tags:
+    - new
+spec:
+  type: openapi
+  owner: group:default/skoop_-_tech_lead
+  lifecycle: production
+  definition:
+    $text: /api-schema.json
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: new-resource
+spec:
+  type: database
+  owner: group:default/skvis
+  system: system:default/nibas
+  dependencyOf:
+    - component:default/SOSI-Veileder-for-utarbeidelse-av-SOSI-produktspesifikasjoner
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: new-domain
+spec:
+  owner: group:default/techtroll
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: new-system
+spec:
+  type: product
+  owner: group:default/cybersikkerhet_-_tech_lead
+  domain: domain:default/new-domain
