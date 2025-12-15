@@ -9,7 +9,8 @@ spec:
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
+    - api:default/security-champion-api-api
+    - api:default/new-api
   system: utviklerportal
 
 ---
@@ -23,7 +24,17 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: /api-schema.json
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: new-api
+spec:
+  type: openapi
+  owner: group:default/skoop_-_tech_lead
+  lifecycle: production
+  definition:
+    $text: /api-schema.json
