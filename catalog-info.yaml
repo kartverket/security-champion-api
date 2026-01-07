@@ -9,8 +9,8 @@ spec:
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
-  system: utviklerportal
+    - api:default/security-champion-api-api
+  system: system:default/utviklerportal
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -22,8 +22,6 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  owner: group:default/hydris_team_3_-_team_lead
+  definition:
+    $text: /api-schema.json
