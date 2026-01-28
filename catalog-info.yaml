@@ -9,8 +9,7 @@ spec:
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
-  system: utviklerportal
+    - api:default/security-champion-api-api
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -23,7 +22,23 @@ spec:
   type: openapi
   lifecycle: production
   owner: skvis
-  definition: |
-    openapi: "3.0.0"
-    info:
-        title: security-champion-api-api
+  definition:
+    $text: definition
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: resource-test
+spec:
+  type: database
+  owner: group:default/skvis
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: system-test
+spec:
+  type: product
+  owner: group:default/skvis
