@@ -10,8 +10,8 @@ spec:
   lifecycle: production
   owner: skvis
   providesApis:
-    - security-champion-api-api
-  system: utviklerportal
+    - api:default/security-champion-api-api
+  system: system:default/utviklerportal
 
 ---
 apiVersion: backstage.io/v1alpha1
