@@ -3,9 +3,9 @@ package com.example.securitychampionapi.controller
 import com.example.securitychampionapi.controller.models.GetSecurityChampionsBody
 import com.example.securitychampionapi.controller.models.GetSecurityChampionsResponse
 import com.example.securitychampionapi.controller.models.SecurityChampionResponse
+import com.example.securitychampionapi.controller.models.SecurityChampionWithNoRepoBody
 import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
 import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
-import com.example.securitychampionapi.controller.models.SetSecurityChampionWithNoRepoBody
 import com.example.securitychampionapi.controller.models.SetSecurityChampionsBody
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.http.HttpStatus
@@ -46,7 +46,7 @@ class SecurityChampionController(
 
     @PostMapping("/setSecurityChampionWithNoRepo")
     fun setSecurityChampionWithNoRepo(
-        @RequestBody body: SetSecurityChampionWithNoRepoBody,
+        @RequestBody body: SecurityChampionWithNoRepoBody,
     ): SetSecurityChampionResponse {
         securityChampionService.setSecurityChampionWithNoRepo(
             securityChampionEmail = body.securityChampionEmail,
