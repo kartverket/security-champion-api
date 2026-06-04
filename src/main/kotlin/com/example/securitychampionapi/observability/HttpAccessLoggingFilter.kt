@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServletResponse
 import java.util.UUID
 import org.slf4j.LoggerFactory
 import org.slf4j.MDC
-import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
