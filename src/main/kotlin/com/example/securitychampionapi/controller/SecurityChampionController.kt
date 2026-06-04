@@ -46,7 +46,7 @@ class SecurityChampionController(
 
     @PostMapping("/setSecurityChampionWithNoRepo")
     fun setSecurityChampionWithNoRepo(
-        @RequestBody body: setSecurityChampionWithNoRepoBody,
+        @RequestBody body: SetSecurityChampionWithNoRepoBody,
     ): SetSecurityChampionResponse {
         securityChampionService.setSecurityChampionWithNoRepo(
             securityChampionEmail = body.securityChampionEmail,
