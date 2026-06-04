@@ -26,7 +26,9 @@ Tjenesten er en spring applikasjon skrevet i Kotlin med Gradle som byggeverktøy
 ### Hvordan kjøre tjenesten
 I intellij kan applikasjonen kjøres ved å kjøre main klassen. Fra kommandolinjen kan applikasjonen kjøres med `./gradlew bootRun`.
 
+Hvis du kjører med Play-knappen i IntelliJ og forventer at Spring Boot skal starte `docker-compose.yaml` automatisk, må `docker`/`docker compose` være tilgjengelig i `PATH` for IntelliJ-prosessen.
 
+Legg til følgende environment variable i IntelliJ Run/Debug Configuration:
 
 ## API Schema
 
@@ -107,7 +109,9 @@ Under finnes en oversikt over API endepunktene til security champion API.
     }
   }
 }
+```bash
+PATH=/opt/homebrew/bin:$PATH
+```
 
-````
 
 
