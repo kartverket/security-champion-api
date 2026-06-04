@@ -17,6 +17,9 @@ spring:
 management:
   server:
     port: 8081
+  metrics:
+    tags:
+      application: ${spring.application.name}
   endpoints:
     web:
       exposure:
