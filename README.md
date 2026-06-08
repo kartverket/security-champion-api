@@ -1,6 +1,6 @@
 # Security Champion API
 
-Dette er en tjeneste for å håndtere security champions for hvert GitHub-repository. Hensikten er å gi en god oversikt over hvem som er security champion og å kunne endre security champions for hver ressurs direkte i backstage. Tjenesten brukes av [Kartverket.dev](https://github.com/kartverket/kartverket.dev) og er kun tilgjengelig internt uten har ikke ingress for andre brukere eller tjenester.
+Dette er en tjeneste for å håndtere security champions for hvert GitHub-repository. Hensikten er å gi en god oversikt over hvem som er security champion og å kunne endre security champions for hver ressurs direkte i Backstage. Tjenesten brukes av [Kartverket.dev](https://github.com/kartverket/kartverket.dev) og er kun tilgjengelig internt og har ikke ingress for andre brukere eller tjenester.
 
 ## Bygg og kjør tjenesten lokalt
 
