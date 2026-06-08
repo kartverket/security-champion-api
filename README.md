@@ -25,6 +25,6 @@ PATH=/opt/homebrew/bin:$PATH
 
 ## Deployment og databaser i produksjon
 
-Deployments blir håndert gjennom [skvis-apps](https://github.com/kartverket/skvis-apps)
+Deployments blir håndtert gjennom [skvis-apps](https://github.com/kartverket/skvis-apps)
 
 Databaser i produksjon blir håndtert gjennom [skvis-terraform](https://github.com/kartverket/skvis-terraform)
