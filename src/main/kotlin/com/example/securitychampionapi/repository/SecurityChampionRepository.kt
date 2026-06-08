@@ -37,7 +37,7 @@ class SecurityChampionRepository(
         securityChampionEmail: String,
         modifiedBy: String,
     ): Int {
-        val query = """    
+        val query = """
         INSERT INTO securityChampion (email, repository, lastModifiedBy) 
         VALUES (:email, :repository, :modifiedBy)
         ON CONFLICT (repository)
