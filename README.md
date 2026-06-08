@@ -5,7 +5,7 @@ Dette er en tjeneste for å håndtere security champions for hvert GitHub-reposi
 ## Bygg og kjør tjenesten lokalt
 
 ### Databaseoppsett
-Tjenesten er satt opp med PostgreSQL som databasesystem og bruker flyway for databasemigreringer. Hvis du ikke har det installert på maskinen, last ned en docker deamon (f.eks colima) og docker-compose.
+Tjenesten er satt opp med PostgreSQL som databasesystem og bruker flyway for databasemigreringer. Hvis du ikke har det installert på maskinen, last ned en docker daemon (f.eks colima) og docker-compose.
 
 ### Hvordan bygge tjenesten
 Tjenesten er en spring applikasjon skrevet i Kotlin med Gradle som byggeverktøy. Fra kommandolinjen kan applikasjonen bygges med `./gradlew build`. 
