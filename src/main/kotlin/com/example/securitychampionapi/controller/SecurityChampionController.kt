@@ -1,7 +1,12 @@
 package com.example.securitychampionapi.controller
 
-
-import com.example.securitychampionapi.controller.models.*
+import com.example.securitychampionapi.controller.models.GetSecurityChampionsBody
+import com.example.securitychampionapi.controller.models.GetSecurityChampionsResponse
+import com.example.securitychampionapi.controller.models.SecurityChampionResponse
+import com.example.securitychampionapi.controller.models.SecurityChampionWithNoRepoBody
+import com.example.securitychampionapi.controller.models.SetSecurityChampionBody
+import com.example.securitychampionapi.controller.models.SetSecurityChampionResponse
+import com.example.securitychampionapi.controller.models.SetSecurityChampionsBody
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
@@ -11,46 +16,53 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
-class SecurityChampionController(val securityChampionService: SecurityChampionService) {
-
+class SecurityChampionController(
+    val securityChampionService: SecurityChampionService,
+) {
     @PostMapping("/securityChampion")
-    fun getSecurityChampions(@RequestBody body: GetSecurityChampionsBody): GetSecurityChampionsResponse {
-        return securityChampionService.getSecurityChampions(body.repositoryNames)
+    fun getSecurityChampions(
+        @RequestBody body: GetSecurityChampionsBody,
+    ): GetSecurityChampionsResponse =
+        securityChampionService
+            .getSecurityChampions(body.repositoryNames)
             .map {
                 SecurityChampionResponse(
                     repositoryName = it.repository,
-                    securityChampionEmail = it.email
+                    securityChampionEmail = it.email,
                 )
-            }
-
-    }
+            }.toList()
 
     @PostMapping("/setSecurityChampion")
-    fun setSecurityChampion(@RequestBody body: SetSecurityChampionBody): SetSecurityChampionResponse {
+    fun setSecurityChampion(
+        @RequestBody body: SetSecurityChampionBody,
+    ): SetSecurityChampionResponse {
         securityChampionService.setSecurityChampion(
             repositoryName = body.repositoryName,
             securityChampionEmail = body.securityChampionEmail,
-            modifiedBy = body.modifiedBy
+            modifiedBy = body.modifiedBy,
         )
         return SetSecurityChampionResponse(status = HttpStatus.OK)
     }
 
     @PostMapping("/setSecurityChampionWithNoRepo")
-    fun setSecurityChampionWithNoRepo(@RequestBody body: setSecurityChampionWithNoRepoBody): SetSecurityChampionResponse {
+    fun setSecurityChampionWithNoRepo(
+        @RequestBody body: SecurityChampionWithNoRepoBody,
+    ): SetSecurityChampionResponse {
         securityChampionService.setSecurityChampionWithNoRepo(
             securityChampionEmail = body.securityChampionEmail,
-            modifiedBy = body.modifiedBy
+            modifiedBy = body.modifiedBy,
         )
         return SetSecurityChampionResponse(status = HttpStatus.OK)
-
     }
 
     @PostMapping("/setSecurityChampions")
-    fun setSecurityChampions(@RequestBody body: SetSecurityChampionsBody): SetSecurityChampionResponse {
+    fun setSecurityChampions(
+        @RequestBody body: SetSecurityChampionsBody,
+    ): SetSecurityChampionResponse {
         securityChampionService.setSecurityChampions(
             repositoryNames = body.repositoryNames,
             securityChampionEmail = body.securityChampionEmail,
-            modifiedBy = body.modifiedBy
+            modifiedBy = body.modifiedBy,
         )
         return SetSecurityChampionResponse(status = HttpStatus.OK)
     }

@@ -1,7 +1,6 @@
 package com.example.securitychampionapi.controller.models
 
-data class setSecurityChampionWithNoRepoBody(
+data class SecurityChampionWithNoRepoBody(
     val securityChampionEmail: String,
-    val modifiedBy: String = "No user provided"
+    val modifiedBy: String = "No user provided",
 )
-
