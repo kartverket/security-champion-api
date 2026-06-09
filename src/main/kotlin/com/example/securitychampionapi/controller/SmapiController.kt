@@ -1,11 +1,8 @@
 package com.example.securitychampionapi.controller
 
-import com.example.securitychampionapi.controller.models.GetSecurityChampionsBody
-import com.example.securitychampionapi.controller.models.GetSecurityChampionsResponse
 import com.example.securitychampionapi.controller.models.SecurityChampionResponse
 import com.example.securitychampionapi.service.SecurityChampionService
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
