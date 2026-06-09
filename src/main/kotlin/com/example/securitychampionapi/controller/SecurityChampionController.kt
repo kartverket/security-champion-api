@@ -30,7 +30,7 @@ class SecurityChampionController(
                     repositoryName = it.repository,
                     securityChampionEmail = it.email,
                 )
-            }
+            }.toList()
 
     @PostMapping("/setSecurityChampion")
     fun setSecurityChampion(

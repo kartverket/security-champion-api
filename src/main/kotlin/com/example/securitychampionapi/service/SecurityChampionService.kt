@@ -14,7 +14,7 @@ class SecurityChampionService(
         repositoryName: String,
         securityChampionEmail: String,
         modifiedBy: String,
-    ) = repository.setSecurityChampion(repositoryName, securityChampionEmail, modifiedBy)
+    ): Int = repository.setSecurityChampion(repositoryName, securityChampionEmail, modifiedBy)
 
     fun setSecurityChampions(
         repositoryNames: List<String>,
@@ -27,7 +27,5 @@ class SecurityChampionService(
     fun setSecurityChampionWithNoRepo(
         securityChampionEmail: String,
         modifiedBy: String,
-    ) {
-        repository.setSecurityChampionWithNoRepo(securityChampionEmail, modifiedBy)
-    }
+    ): Int = repository.setSecurityChampionWithNoRepo(securityChampionEmail, modifiedBy)
 }
