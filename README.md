@@ -13,7 +13,7 @@ Tjenesten er en spring applikasjon skrevet i Kotlin med Gradle som byggeverktøy
 Brukes intellij kan applikasjonen også bygges fra Gradle menyen. Det er også en Dockerfile på rotnivå som bygger og kjører tjenesten.
 
 ### Hvordan kjøre tjenesten
-I intellij kan applikasjonen kjøres ved å kjøre main klassen. Fra kommandolinjen kan applikasjonen kjøres med `./gradlew bootRun`.
+I IntelliJ kan applikasjonen kjøres ved å kjøre main klassen. Fra kommandolinjen kan applikasjonen kjøres med `./gradlew bootRun`.
 
 Hvis du kjører med Play-knappen i IntelliJ og forventer at Spring Boot skal starte `docker-compose.yaml` automatisk, må `docker`/`docker compose` være tilgjengelig i `PATH` for IntelliJ-prosessen.
 
