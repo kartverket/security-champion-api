@@ -9,6 +9,4 @@ spec:
   type: service
   lifecycle: production
   owner: skvis
-  providesApis:
-    - security-champion-api-api
   system: utviklerportal
