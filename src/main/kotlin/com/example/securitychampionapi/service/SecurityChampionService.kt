@@ -21,9 +21,7 @@ class SecurityChampionService(
         repositoryNames: List<String>,
         securityChampionEmail: String,
         modifiedBy: String,
-    ) {
-        repository.setSecurityChampions(repositoryNames, securityChampionEmail, modifiedBy)
-    }
+    ): IntArray = repository.setSecurityChampions(repositoryNames, securityChampionEmail, modifiedBy)
 
     fun getAllRepositoryNamesWithSecurityChampion() =
         repository
