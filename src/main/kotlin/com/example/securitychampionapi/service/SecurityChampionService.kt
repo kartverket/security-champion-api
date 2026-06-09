@@ -1,6 +1,5 @@
 package com.example.securitychampionapi.service
 
-import com.example.securitychampionapi.controller.models.SecurityChampionResponse
 import com.example.securitychampionapi.dto.SecurityChampion
 import com.example.securitychampionapi.repository.SecurityChampionRepository
 import org.springframework.stereotype.Service
@@ -23,10 +22,7 @@ class SecurityChampionService(
         modifiedBy: String,
     ): IntArray = repository.setSecurityChampions(repositoryNames, securityChampionEmail, modifiedBy)
 
-    fun getAllRepositoryNamesWithSecurityChampion() =
-        repository
-            .getRepositoriesWithSecurityChampions()
-            .map { SecurityChampionResponse(it.repository, it.email) }
+    fun getAllRepositoryNamesWithSecurityChampion(): List<SecurityChampion> = repository.getRepositoriesWithSecurityChampions()
 
     fun setSecurityChampionWithNoRepo(
         securityChampionEmail: String,

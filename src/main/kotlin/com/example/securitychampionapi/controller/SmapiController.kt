@@ -28,5 +28,13 @@ class SmapiController(
             }
 
     @GetMapping("/repositories/all")
-    fun getAllRepositoryNamesWithSecurityChampion(): List<SecurityChampionResponse> = securityChampionService.getAllRepositoryNamesWithSecurityChampion()
+    fun getAllRepositoryNamesWithSecurityChampion(): List<SecurityChampionResponse> =
+        securityChampionService
+            .getAllRepositoryNamesWithSecurityChampion()
+            .map {
+                SecurityChampionResponse(
+                    repositoryName = it.repository,
+                    securityChampionEmail = it.email,
+                )
+            }
 }
