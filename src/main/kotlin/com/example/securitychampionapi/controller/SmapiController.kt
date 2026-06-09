@@ -14,19 +14,6 @@ import org.springframework.web.bind.annotation.RestController
 class SmapiController(
     val securityChampionService: SecurityChampionService,
 ) {
-    @GetMapping("/securityChampions")
-    fun getSecurityChampions(
-        @RequestBody body: GetSecurityChampionsBody,
-    ): GetSecurityChampionsResponse =
-        securityChampionService
-            .getSecurityChampions(body.repositoryNames)
-            .map {
-                SecurityChampionResponse(
-                    repositoryName = it.repository,
-                    securityChampionEmail = it.email,
-                )
-            }
-
     @GetMapping("/repositories/all")
     fun getAllRepositoryNamesWithSecurityChampion(): List<SecurityChampionResponse> =
         securityChampionService
