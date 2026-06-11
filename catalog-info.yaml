@@ -9,4 +9,5 @@ spec:
   type: service
   lifecycle: production
   owner: skvis
-  system: utviklerportal
+  system: system:default/utviklerportal
+  domain: domain:default/kartprodukter
