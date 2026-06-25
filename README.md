@@ -28,3 +28,9 @@ PATH=/opt/homebrew/bin:$PATH
 Deployments blir håndtert gjennom [skvis-apps](https://github.com/kartverket/skvis-apps)
 
 Databaser i produksjon blir håndtert gjennom [skvis-terraform](https://github.com/kartverket/skvis-terraform)
+
+## Tracing (OpenTelemetry)
+
+Applikasjonen bruker `opentelemetry-spring-boot-starter` for å eksportere traces
+
+Lokal profil (`application-local.yaml`) har `otel.sdk.disabled: true` som standard, slik at lokal kjøring ikke prøver a sende traces til en manglende collector.
