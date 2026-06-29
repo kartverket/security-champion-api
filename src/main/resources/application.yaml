@@ -39,7 +39,7 @@ otel:
   service:
     name: ${OTEL_SERVICE_NAME:security-champion-api}
   resource:
-    attributes: service.namespace=${OTEL_SERVICE_NAMESPACE:kartverket},deployment.environment=${DEPLOYMENT_ENVIRONMENT:dev}
+    attributes: service.namespace=${OTEL_SERVICE_NAMESPACE:sikkerhetsmetrikker},deployment.environment=${DEPLOYMENT_ENVIRONMENT:dev}
   traces:
     exporter: otlp
     sampler: parentbased_always_on
