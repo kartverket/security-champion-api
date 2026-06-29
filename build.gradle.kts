@@ -29,6 +29,7 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:$otelInstrumentationVersion")
+        mavenBom("com.fasterxml.jackson:jackson-bom:2.21.4") // Fixes CVE-2026-54513
     }
 }
 
