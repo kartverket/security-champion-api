@@ -6,6 +6,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
 }
 
+val otelInstrumentationVersion = "2.19.0"
+
 ktlint {
     version.set("1.6.0")
 }
@@ -24,13 +26,19 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:$otelInstrumentationVersion")
+        mavenBom("com.fasterxml.jackson:jackson-bom:2.21.4") // Fixes CVE-2026-54513
+    }
+}
+
 ext["tomcat.version"] = "10.1.55"
 ext["postgresql.version"] = "42.7.11"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("io.micrometer:micrometer-tracing-bridge-otel")
-    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+    implementation("io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter")
     implementation("net.logstash.logback:logstash-logback-encoder:8.1")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")

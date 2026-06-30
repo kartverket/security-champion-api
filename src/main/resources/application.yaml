@@ -17,12 +17,6 @@ spring:
 management:
   server:
     port: 8081
-  tracing:
-    sampling:
-      probability: ${TRACING_SAMPLING_PROBABILITY:1.0}
-  otlp:
-    tracing:
-      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318/v1/traces}}
   metrics:
     tags:
       application: ${spring.application.name}
@@ -40,3 +34,25 @@ management:
 
 server:
   port: ${PORT:8080}
+
+otel:
+  service:
+    name: ${OTEL_SERVICE_NAME:security-champion-api}
+  resource:
+    attributes: service.namespace=${OTEL_SERVICE_NAMESPACE:sikkerhetsmetrikker},deployment.environment=${DEPLOYMENT_ENVIRONMENT:dev}
+  traces:
+    exporter: otlp
+    sampler: parentbased_always_on
+  metrics:
+    exporter: none
+  logs:
+    exporter: none
+  exporter:
+    otlp:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://otlp.grafana-alloy:4317}
+      protocol: ${OTEL_EXPORTER_OTLP_PROTOCOL:grpc}
+  propagators: tracecontext,baggage
+  instrumentation:
+    micrometer:
+      enabled: false
+
