@@ -10,3 +10,5 @@ spec:
   lifecycle: production
   owner: skvis
   system: utviklerportal
+  dependsOn:
+    - resource:default/runtime-skip
