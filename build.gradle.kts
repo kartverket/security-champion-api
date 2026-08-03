@@ -30,10 +30,22 @@ dependencyManagement {
     imports {
         mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:$otelInstrumentationVersion")
         mavenBom("com.fasterxml.jackson:jackson-bom:2.21.4") // Fixes CVE-2026-54513
+        mavenBom("tools.jackson:jackson-bom:3.1.5") // Security fix
     }
 }
 
-ext["postgresql.version"] = "42.7.11"
+ext["tomcat.version"] = "11.0.24"
+ext["postgresql.version"] = "42.7.13"
+ext["spring-framework.version"] = "7.0.8" // security fix
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.springframework.data" && requested.name == "spring-data-commons") {
+            useVersion("4.0.6")
+            because("Security fix: upgrade from 4.0.5 to 4.0.6")
+        }
+    }
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
