@@ -1,0 +1,23 @@
+version: 2
+registries:
+  dockerhub-hardened-images:
+    type: docker-registry
+    url: https://dhi.io
+    username: ${{ secrets.DOCKERHUB_USERNAME }}
+    password: ${{ secrets.DOCKERHUB_TOKEN }}
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    registries:
+      - dockerhub-hardened-images
+

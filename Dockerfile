@@ -1,25 +1,18 @@
-ARG BUILD_IMAGE=eclipse-temurin:24.0.2_12-jdk-alpine-3.22
-ARG IMAGE=eclipse-temurin:25.0.2_10-jre-alpine-3.23
+# To update: docker buildx imagetools inspect dhi.io/eclipse-temurin:25-jdk-alpine3.24-dev
+ARG BUILD_IMAGE=dhi.io/eclipse-temurin:25-jdk-alpine3.24-dev@sha256:8f1e944fe65a7120dedf30a0754c743f211701babced9625b9ed5c9cddb52b44
+# To update: docker buildx imagetools inspect dhi.io/eclipse-temurin:25-alpine3.24
+ARG IMAGE=dhi.io/eclipse-temurin:25-alpine3.24@sha256:cbd182208579d29ec12007e7c570e72b57eff5353c69f6fa86352bf65469a222
 
 FROM ${BUILD_IMAGE} AS build
+WORKDIR /src
 COPY . .
-RUN ./gradlew build -x test
+RUN ./gradlew bootJar
 
 FROM ${IMAGE}
-# Update package index and upgrade libexpat to a specific version
-RUN apk upgrade --no-cache # && apk add --no-cache libexpat=2.7.0-r0
 
-RUN mkdir /app
 EXPOSE 8080 8081
-RUN adduser -D user && chown -R user /app
 WORKDIR /app
-COPY --from=build /build/libs/security-champion-api-0.0.1-SNAPSHOT.jar ./app.jar
 
-
-USER user
+COPY --from=build /src/build/libs/*.jar ./app.jar
+USER nonroot
 ENTRYPOINT ["java","-jar","app.jar"]
-
-# Use the health endpoint of the application to provide information through docker about the health state of the application
-HEALTHCHECK --start-period=30s --interval=5m \
-   CMD wget -O - --quiet --tries=1 http://localhost:8081/actuator/health | grep UP || exit 1
-
