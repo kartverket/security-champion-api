@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "2.2.10"
-    kotlin("plugin.spring") version "2.2.10"
-    id("org.springframework.boot") version "3.5.14"
+    kotlin("jvm") version "2.3.21"
+    kotlin("plugin.spring") version "2.3.21"
+    id("org.springframework.boot") version "4.0.6"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
 }
@@ -18,7 +18,7 @@ description = "security-champion-api"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(24)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -30,11 +30,22 @@ dependencyManagement {
     imports {
         mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:$otelInstrumentationVersion")
         mavenBom("com.fasterxml.jackson:jackson-bom:2.21.4") // Fixes CVE-2026-54513
+        mavenBom("tools.jackson:jackson-bom:3.1.5") // Security fix
     }
 }
 
-ext["tomcat.version"] = "10.1.55"
-ext["postgresql.version"] = "42.7.11"
+ext["tomcat.version"] = "11.0.24"
+ext["postgresql.version"] = "42.7.13"
+ext["spring-framework.version"] = "7.0.8" // security fix
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.springframework.data" && requested.name == "spring-data-commons") {
+            useVersion("4.0.6")
+            because("Security fix: upgrade from 4.0.5 to 4.0.6")
+        }
+    }
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -58,6 +69,7 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_25)
     }
 }
 
