@@ -6,7 +6,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
 }
 
-val otelInstrumentationVersion = "2.19.0"
+val otelInstrumentationVersion = "2.30.0"
 val postgresVersion = "42.7.13"
 
 ktlint {
