@@ -8,6 +8,7 @@ plugins {
 
 val otelInstrumentationVersion = "2.19.0"
 val postgresVersion = "42.7.13"
+val flywayVersion = "12.6.2"
 
 ktlint {
     version.set("1.6.0")
@@ -50,7 +51,6 @@ configurations.all {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter")
-    implementation("net.logstash.logback:logstash-logback-encoder:8.1")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -61,7 +61,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.flywaydb:flyway-core")
-    implementation("org.flywaydb:flyway-database-postgresql")
+    implementation("org.flywaydb:flyway-database-postgresql:${flywayVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus")
 }
 
