@@ -1,4 +1,42 @@
-GET http://localhost:8082/actuator/health
+### Actuator health
+GET http://localhost:8083/actuator/health
 
-###
-GET http://localhost:8081/api/repositories/all
+### Get all repositories with security champion
+GET http://localhost:8082/api/repositories/all
+
+### Get security champions for a list of repositories
+POST http://localhost:8082/api/securityChampion
+Content-Type: application/json
+
+{
+  "repositoryNames": ["repo-one", "repo-two"]
+}
+
+### Set security champion for a single repository
+POST http://localhost:8082/api/setSecurityChampion
+Content-Type: application/json
+
+{
+  "repositoryName": "repo-one",
+  "securityChampionEmail": "champion@example.com",
+  "modifiedBy": "admin@example.com"
+}
+
+### Set security champion with no repository
+POST http://localhost:8082/api/setSecurityChampionWithNoRepo
+Content-Type: application/json
+
+{
+  "securityChampionEmail": "champion@example.com",
+  "modifiedBy": "admin@example.com"
+}
+
+### Set security champions for multiple repositories
+POST http://localhost:8082/api/setSecurityChampions
+Content-Type: application/json
+
+{
+  "repositoryNames": ["repo-one", "repo-two"],
+  "securityChampionEmail": "champion@example.com",
+  "modifiedBy": "admin@example.com"
+}
