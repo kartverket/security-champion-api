@@ -37,6 +37,11 @@ Typisk feil på macmaskiner er at `docker`/`docker compose` ikke er tilgjengelig
 PATH=/opt/homebrew/bin:$PATH[]()
 ```
 
+### Konfigurasjon
+Konfigurasjon for tjenesten ligger i `src/main/resources/application.yaml` og `src/main/resources/application-local.yaml`. 
+Disse filene inneholder konfigurasjon for Spring Boot, database og flyway. 
+Skal du gjøre endringer i konfigurasjonen, gjør det i `application-local.yaml` under utvikling. For eksempel, hvis du ønsker å endre porten tjenesten kjører på, endre `server.port` i `application-local.yaml`.
+
 ## Deployment og databaser i produksjon
 
 Deployments blir håndtert gjennom [skvis-apps](https://github.com/kartverket/skvis-apps)
