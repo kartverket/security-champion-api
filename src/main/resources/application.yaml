@@ -5,14 +5,11 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
     hikari:
       schema: secchamp
       maximum-pool-size: 5
       minimum-idle: 1
 
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 management:
   server:
