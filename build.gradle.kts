@@ -7,6 +7,7 @@ plugins {
 }
 
 val otelInstrumentationVersion = "2.19.0"
+val postgresVersion = "42.7.13"
 
 ktlint {
     version.set("1.6.0")
@@ -35,7 +36,6 @@ dependencyManagement {
 }
 
 ext["tomcat.version"] = "11.0.24"
-ext["postgresql.version"] = "42.7.13"
 ext["spring-framework.version"] = "7.0.8" // security fix
 
 configurations.all {
@@ -56,13 +56,12 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    runtimeOnly("org.postgresql:postgresql:")
+    implementation("org.postgresql:postgresql:${postgresVersion}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
-    implementation("com.google.cloud.sql:postgres-socket-factory:1.25.3")
     implementation("io.micrometer:micrometer-registry-prometheus")
 }
 
