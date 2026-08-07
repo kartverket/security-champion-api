@@ -118,7 +118,7 @@ jobs:
 
       - name: Build and push docker image to Github Container Registry
         id: build-docker
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: ${{ !github.event.pull_request.draft }}
