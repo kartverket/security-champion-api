@@ -149,6 +149,7 @@ jobs:
           trivy: true # TODO: change to false to only scan with sysdig
           sysdig: true
           sysdig_token: ${{ secrets.SECURE_API_TOKEN }}
+          trivy_vex: 'true'
 
   dev-deploy:
     name: Deploy to KV-dev
