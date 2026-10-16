@@ -142,13 +142,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Run Pharos"
-        uses: kartverket/pharos@test-sysdig-scanner
+        uses: kartverket/pharos@v0.7.0
         with:
           image_url: ${{ needs.build.outputs.image_url }}        
           tfsec: false
           trivy: true # TODO: change to false to only scan with sysdig
           sysdig: true
           sysdig_token: ${{ secrets.SECURE_API_TOKEN }}
+          trivy_vex: 'true'
 
   dev-deploy:
     name: Deploy to KV-dev
