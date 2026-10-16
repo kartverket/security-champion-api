@@ -7,7 +7,7 @@ plugins {
 }
 
 val otelInstrumentationVersion = "2.19.0"
-val postgresVersion = "42.7.13"
+val postgresVersion = "42.7.14"
 val flywayVersion = "12.6.2"
 
 ktlint {
