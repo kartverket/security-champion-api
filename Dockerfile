@@ -1,7 +1,7 @@
 # To update: docker buildx imagetools inspect dhi.io/eclipse-temurin:25-jdk-alpine3.24-dev
-ARG BUILD_IMAGE=ghcr.io/kartverket/emudhra-images/jdk/dockerhub:jdk-25.0-alpine3.24@sha256:3b9c9aa8f9cd11b2660bace83082b223abc6923a9fc54bb7e08c9f122565db72
+ARG BUILD_IMAGE=ghcr.io/kartverket/emudhra-images/jdk/dockerhub:jdk-25.0-alpine3.24@sha256:9040fd4372ac7c4581712c77ba9324a175ff9f9679ab3ff60ea5c12eb02fcdb9
 # To update: docker buildx imagetools inspect ghcr.io/kartverket/emudhra-images/jre/dhi:jre-25.0-alpine3.24
-ARG IMAGE=ghcr.io/kartverket/emudhra-images/jre/dhi:jre-25.0-alpine3.24@sha256:f0b12aab0f96059700032dada95e0bf85e8e0e7404d92246370a0a752ed21c4d
+ARG IMAGE=ghcr.io/kartverket/emudhra-images/jre/dhi:jre-25.0-alpine3.24@sha256:0560e1680f602893991ce298a03975ebf3cc467fc0b01275ed1d83d03e013044
 
 FROM ${BUILD_IMAGE} AS build
 WORKDIR /src
