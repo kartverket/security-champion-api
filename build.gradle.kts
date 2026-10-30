@@ -1,14 +1,14 @@
 plugins {
     kotlin("jvm") version "2.4.21"
     kotlin("plugin.spring") version "2.4.21"
-    id("org.springframework.boot") version "4.1.1"
+    id("org.springframework.boot") version "4.1.2"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
-val otelInstrumentationVersion = "2.32.0"
+val otelInstrumentationVersion = "2.33.1"
 val postgresVersion = "42.7.14"
-val flywayVersion = "13.10.0"
+val flywayVersion = "13.11.1"
 
 ktlint {
     version.set("1.6.0")
@@ -31,8 +31,8 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:$otelInstrumentationVersion")
-        mavenBom("com.fasterxml.jackson:jackson-bom:2.22.3") // Fixes CVE-2026-54513
-        mavenBom("tools.jackson:jackson-bom:3.2.3") // Security fix
+        mavenBom("com.fasterxml.jackson:jackson-bom:2.22.4") // Fixes CVE-2026-54513
+        mavenBom("tools.jackson:jackson-bom:3.2.4") // Security fix
     }
 }
 
