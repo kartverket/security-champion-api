@@ -1,5 +1,5 @@
 # To update: docker buildx imagetools inspect dhi.io/eclipse-temurin:25-jdk-alpine3.24-dev
-ARG BUILD_IMAGE=dhi.io/eclipse-temurin:25-jdk-alpine3.24-dev@sha256:7f6fe5ca802ecb2e6de576a47813213949b11a1116030e57151b6c8b94adfa26
+ARG BUILD_IMAGE=dhi.io/eclipse-temurin:25-jdk-alpine3.24-dev@sha256:e4bcb21502dcd0d8e7f5e9a30cb6fca24c02aaae58137853a9869fba0a5b6570
 # To update: docker buildx imagetools inspect dhi.io/eclipse-temurin:25-alpine3.24
 ARG IMAGE=dhi.io/eclipse-temurin:25-alpine3.24@sha256:7f6fe5ca802ecb2e6de576a47813213949b11a1116030e57151b6c8b94adfa26
 
@@ -8,7 +8,7 @@ WORKDIR /src
 COPY . .
 RUN ./gradlew bootJar
 
-FROM --platform=linux/amd64 ${IMAGE}
+FROM ${IMAGE}
 
 EXPOSE 8080 8081
 WORKDIR /app
