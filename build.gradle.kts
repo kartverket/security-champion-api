@@ -8,7 +8,7 @@ plugins {
 
 val otelInstrumentationVersion = "2.33.1"
 val postgresVersion = "42.7.14"
-val flywayVersion = "13.12.0"
+val flywayVersion = "13.12.1"
 
 ktlint {
     version.set("1.6.0")
@@ -31,8 +31,8 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:$otelInstrumentationVersion")
-        mavenBom("com.fasterxml.jackson:jackson-bom:2.22.4") // Fixes CVE-2026-54513
-        mavenBom("tools.jackson:jackson-bom:3.2.4") // Security fix
+        mavenBom("com.fasterxml.jackson:jackson-bom:2.23.0") // Fixes CVE-2026-54513
+        mavenBom("tools.jackson:jackson-bom:3.3.0") // Security fix
     }
 }
 
