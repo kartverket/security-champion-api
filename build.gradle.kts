@@ -1,14 +1,14 @@
 plugins {
     kotlin("jvm") version "2.4.21"
     kotlin("plugin.spring") version "2.4.21"
-    id("org.springframework.boot") version "4.1.2"
+    id("org.springframework.boot") version "4.2.0"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
-val otelInstrumentationVersion = "2.33.1"
-val postgresVersion = "42.7.14"
-val flywayVersion = "13.12.1"
+val otelInstrumentationVersion = "2.34.0"
+val postgresVersion = "42.7.15"
+val flywayVersion = "13.13.0"
 
 ktlint {
     version.set("1.6.0")
